@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TRENT INTRO</title>
+
+  <!-- Link to external CSS file -->
+  <link rel="stylesheet" href="animation.css">
+</head>
+<body>
+<div class="container">
+  <div class="box">
+    <div class="spin-container">
+      <div class="shape">
+        <div class="bd"></div>
+      </div>
+     </div>
+  </div>
+</div>
+<audio id="backgroundMusic" loop autoplay>
+        <!-- Replace with your actual audio file -->
+        <source src="cloned_meme_voice0.wav" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <script>
+        const audio = document.getElementById('backgroundMusic');
+        audio.volume = 0.3;
+        
+        // Start music after any user interaction
+        document.body.addEventListener('click', function() {
+            audio.play();
+        }, { once: true }); // Only trigger once
+    </script>
+</body>
+</html>
