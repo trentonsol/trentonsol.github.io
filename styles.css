@@ -121,6 +121,15 @@ button, input, textarea, select {
   text-align: center;
 }
 
+.hero .overlay:nth-of-type(3) i:hover {
+  text-shadow: 5px 5px rgba(0,0,0,1);
+}
+
+.hero .overlay:nth-of-type(3) .no-link:hover {
+  text-shadow: 5px 5px rgba(0,0,0,0.3);
+}
+
+
 .hero .overlay h1{
   font-family: 'Press Start 2P', sans-serif;
   background-color: rgba(255, 165, 0, 1);
@@ -131,15 +140,28 @@ button, input, textarea, select {
   
 }
 
-.hero .overlay p{
-  margin-top: 10%;
+.hero .overlay h3{
+  margin-top: 2%;
   /*background-color: rgba(255, 165, 0, 1);*/
   /*width: 10%;*/
   padding: 5px;
   color: white; 
   font: bold 24px/45px Helvetica, Sans-Serif; 
-  text-align: right;
   line-height: 1.5;
+  text-align: left;
+  
+}
+
+.hero .overlay p{
+  margin-top: 1%;
+  /*background-color: rgba(255, 165, 0, 1);*/
+  /*width: 10%;*/
+  padding: 5px;
+  color: white; 
+  font: bold 17px/34px Helvetica, Sans-Serif; 
+  text-align: left;
+  line-height: 1.5;
+  white-space: pre-wrap; /* key! */
   
 }
 
@@ -233,13 +255,13 @@ i {
         text-align: center;
         margin-bottom: 20px;
       }
-      
-      .hero .overlay p {
-        font-size: 1rem;
-        line-height: 1.4;
+
+      .hero .overlay h3 {
         text-align: center;
-        margin-top: 0;
-        margin-bottom: 40px;
+      }
+
+      .hero .overlay p {
+        text-align: center;
       }
       
       .hero .overlay:nth-of-type(1) i {
