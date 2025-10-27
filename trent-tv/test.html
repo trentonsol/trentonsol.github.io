@@ -1,33 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<title>Follower Count</title>
-</head>
-<body>
-  <p id="output">Loading follower count...</p>
+footer {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.8rem;
+  line-height: 1.6;
+  letter-spacing: 0.03em;
+  color: #4b5563; /* Tailwind’s gray-600 */
+  background-color: #f9fafb;
+  text-align: center;
+  padding: 1rem 0;
+}
 
-  <script>
-    const username = "trentonsolana"; // change to any username
-    const url = `https://nitter.poast.org/trentonsolana`;
-
-    fetch(url)
-      .then(response => response.text())
-      .then(html => {
-        const followersMatch = html.match(/(\d[\d,]*)\s*<\/span>\s*<span[^>]*>\s*Followers/i)?.[1];
-
-        if (followersMatch) {
-          document.getElementById("output").textContent =
-            `${username} has ${followersMatch[1]} followers.`;
-        } else {
-          document.getElementById("output").textContent =
-            "Could not find follower count.";
-        }
-      })
-      .catch(err => {
-        document.getElementById("output").textContent =
-          "Error fetching data: " + err.message;
-      });
-  </script>
-</body>
-</html>
+@media (prefers-color-scheme: dark) {
+  footer {
+    color: #d1d5db; /* gray-300 */
+    background-color: #111827; /* gray-900 */
+  }
+}
