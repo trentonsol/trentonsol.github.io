@@ -1,24 +1,125 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700');
+
 * {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
 body {
-  background: orange;
+  /*background: rgba(255, 165, 0, 0.5);*/
+  background: lightgray;
+  font: 16px 'Open Sans', sans-serif;
 }
 
-.container {
-  height: 97vh;
+.top-left {
+  position: fixed;   /* stays in the same spot even when scrolling */
+  top: 10px;         /* distance from the top */
+  left: 10px;        /* distance from the left */
+  font-size: 18px;
+  font-weight: bold;
+  font-family: 'Press Start 2P', sans-serif;
+  display: inline-flex;
+  align-items: center; /* Vertically centers everything */
+  color: white;
+  text-shadow: 2px 2px rgba(0,0,0,1);
+}
+
+.top-left::before {
+  content: "\f26c";         
+  font-family: "Font Awesome 7 Free";
+  font-weight: 900;         /* Required for solid icons */
+  margin-left: 8px;
+  padding-right: 5px;
+}
+
+.top-right {
+  position: fixed;   /* stays in the same spot even when scrolling */
+  top: 10px;         /* distance from the top */
+  right: 10px;        /* distance from the left */
+  font-size: 18px;
+  font-weight: bold;
+  font-family: 'Press Start 2P', sans-serif;
+  display: inline-flex;
+  align-items: center; /* Vertically centers everything */
+  color: white;
+  text-shadow: 2px 2px rgba(0,0,0,1);
+}
+
+.top-right::after {
+  content: "\f46b";         
+  font-family: "Font Awesome 7 Free";
+  font-weight: 1200;         /* Required for solid icons */
+  margin-left: 8px;
+  padding-right: 5px;
+}
+
+.tv {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.stats {
+    width: 100%;
+    
+    background-color: rgba(255,255,255, 1);
+    display: flex;
+    flex-direction: row;
+    
+    
+}
+
+.stat {
+  display: flex;
+  justify-content: center; /* centers horizontally */
+  flex-direction: column;
+  align-items: center;
+  flex-grow: 1;
+  
+  font-size: 30px;
+	font-weight: bold;
+	line-height: 1.2;
+  color: orange;
+  
+  padding: 20px;
+}
+
+.stat .description {
+  margin-top: 10px;
+  font-size: 20px;
+	font-weight: bold;
+  font-variant: small-caps;
+  color: black;
+}
+
+.value-container {
+  display: flex;
+  align-items: center;
+  
+}
+
+.value-container i{
+  margin-right: 10px;
+}
+
+.display {
+  height: 82vh;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  
+  flex-grow: 1;
 }
 
 .box {
-  width: 60vmin;
-  height: 60vmin;
+  width: 50vmin;
+  height: 50vmin;
   border: 0.5px dashed rgba(255,255,255, 1);
   position: relative;
   background-color: black;
+ 
   
 
   &::before {
@@ -73,7 +174,42 @@ body {
   animation: spin 12s ease-in-out infinite alternate-reverse;
   opacity: 1;
   z-index: 2;
+  filter: grayscale(100%);
 }
+
+.middle-bar {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  top: 35%;
+  left: 0;
+  background-color: rgba(255,255,255, 1);
+  color: black;
+  text-align: left;
+  padding: 10px;
+  width:100%;
+  height: 10%;
+  font-weight: bold;
+  z-index: -100;
+  display: none;
+  
+}
+
+.middle-bar p {
+  width: 50%;
+}
+
+.middle-bar .name {
+  text-align: left;
+  
+}
+
+.middle-bar .title {
+  text-align: right;
+  
+}
+
+
 
 audio { display:none;}
 
