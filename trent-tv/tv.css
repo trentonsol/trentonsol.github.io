@@ -78,10 +78,11 @@ background: linear-gradient(
   font-family: 'Poppins', 'Inter', sans-serif;
   font-weight: 800;
   font-size: 0.8rem;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: rgba(255,156,0, 0.35);
+  color: rgba(0,0,0, 0.2);
   text-shadow: 0.4px 0 0 currentColor, -0.4px 0 0 currentColor;
+
 
   text-align: right;
   
@@ -106,9 +107,9 @@ background: linear-gradient(
     font-family: 'Poppins', 'Inter', sans-serif;
   font-weight: 800;
   font-size: 0.8rem;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: rgba(255,156,0, 0.4);
+  color: rgba(0,0,0, 0.2);
   text-shadow: 0.4px 0 0 currentColor, -0.4px 0 0 currentColor;
   text-align: left;
   
