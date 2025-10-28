@@ -95,6 +95,15 @@ background: linear-gradient(
   
 }
 
+.next-bar p::before {
+  content: "\f04e";         
+  font-family: "Font Awesome 7 Free";
+  font-weight: 900;         /* Required for solid icons */
+  margin-left: 8px;
+  padding-right: 2px;
+  color: darkorange;
+}
+
 .next-bar span {
   color: rgba(0,0,0, 1);
   font-size: 0.85rem;
@@ -114,8 +123,28 @@ background: linear-gradient(
   text-align: left;
   
   padding: 7px;
+  white-space: nowrap;
+  overflow: hidden;
 
   
+}
+
+/* The sliding text */
+.footer-ticker {
+  display: inline-block;
+  padding-left: 100%;
+  animation: slide-left 20s linear infinite;
+  
+}
+
+/* Animation definition */
+@keyframes slide-left {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
 }
 
 .footer-bar span {
@@ -124,9 +153,41 @@ background: linear-gradient(
   text-shadow: 0.4px 0 0 currentColor, -0.4px 0 0 currentColor;
 }
 
+.footer-bar .separator{
+  color: rgba(255,156,0, 0.25);
+  padding: 0 5px;
+}
+
 .footer-bar p {
   display: inline-block;
   padding-right: 50px;
+}
+
+.footer-bar .trending::before {
+  content: "\e098";         
+  font-family: "Font Awesome 7 Free";
+  font-weight: 900;         /* Required for solid icons */
+  margin-left: 8px;
+  padding-right: 2px;
+  color: green;
+}
+
+.footer-bar .community::before {
+  content: "\f086";         
+  font-family: "Font Awesome 7 Free";
+  font-weight: 900;         /* Required for solid icons */
+  margin-left: 8px;
+  padding-right: 2px;
+  color: lightskyblue;
+}
+
+.footer-bar .news::before {
+  content: "\f111";         
+  font-family: "Font Awesome 7 Free";
+  font-weight: 900;         /* Required for solid icons */
+  margin-left: 8px;
+  padding-right: 2px;
+  color: red;
 }
 
 .stats {
