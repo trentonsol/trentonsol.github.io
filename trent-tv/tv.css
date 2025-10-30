@@ -75,12 +75,12 @@ body.on-air {
   background-color: white;
   /* Vertically centers everything */
   color: red;
-  
+
   padding: 3px;
   padding-left: 35px;
   width: 110px;
   display: none;
-  
+
 }
 
 .top-right {
@@ -156,6 +156,10 @@ body.on-air {
   text-shadow: 0.4px 0 0 currentColor, -0.4px 0 0 currentColor;
 }
 
+.next-bar .next-text {
+  display: inline-block;
+}
+
 .footer-bar {
   width: 100%;
   background: rgba(255, 255, 255, 0.8);
@@ -220,7 +224,7 @@ body.on-air {
   color: green;
 }
 
-.footer-bar .community::before {
+.footer-bar .spotlight::before {
   content: "\f086";
   font-family: "Font Awesome 7 Free";
   font-weight: 900;
@@ -411,4 +415,61 @@ audio {
   to {
     transform: rotate(1turn);
   }
+}
+
+
+/* === Mobile Styles === */
+@media (max-width: 768px) {
+  .top-left {
+    font-size: 12px;
+  }
+
+  .top-right {
+    font-size: 12px;
+  }
+
+  .box {
+    width: 35vmin;
+    height: 35vmin;
+  }
+
+  .next-bar {
+    font-size: 0.7rem;
+  }
+
+  .next-bar span {
+    font-size: 0.72rem;
+  }
+
+  .stat {
+    font-size: 20px;
+    padding: 5px 5px 15px 5px;
+  }
+
+  .stat .value-container {
+    flex-direction: column;
+
+  }
+
+  .stat i {
+    padding: 10px;
+  }
+
+  .stat .description {
+    display: none;
+  }
+
+  .footer-bar {
+    font-size: 0.7rem;
+  }
+
+  .footer-bar span {
+    font-size: 0.72rem;
+  }
+
+  .middle-bar p {
+    font-size: 11px;
+
+  }
+
 }
