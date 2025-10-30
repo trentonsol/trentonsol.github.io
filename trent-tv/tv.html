@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,94 +11,91 @@
   <!-- Link to external CSS file -->
   <link rel="stylesheet" href="tv.css">
 </head>
-<body>
-<div class="top-left">TRENT TV</div>
-<div class="top-right">POWERED BY</div>
-<div class="tv">
-<div class="display">
-  <div class="box">
-    <div class="spin-container">
-      <div class="shape">
-        <div class="bd"></div>
-      </div>
-     </div>
-  </div>
-</div>
-<div class="next-bar">
-  <p> <span> next up: </span> john malcom &mdash; traded drunk after a drinking night... </p>
-</div>
-  <div class="stats">
-    <div class="stat">
-      <div class="value-container">
-        <i class="fa-regular fa-clock"></i>
-        <p class="value"> 0:05 </p>
-      </div>
-      <p class="description"> on-air countdown</p>
-    </div>
-    <div class="stat">
-      <div class="value-container">
-        <i class="fa-regular fa-paper-plane"></i>
-        <p class="value value-name"> 50 </p>
-      </div>
-      <p class="description">total submitted stories</p>
-    </div>
-    <div class="stat">
-      <div class="value-container">
-        <i class="fa-solid fa-list"></i>
-        <p class="value"> 20 </p>
-      </div>
-      <p class="description">queued stories</p>
-    </div>
-    <div class="stat">
-      <div class="value-container">
-        <i class="fa-solid fa-list-check"></i>
-        <p class="value"> 50 </p>
-      </div>
-      <p class="description">voiced stories</p>
-    </div>
-    <div class="stat">
-      <div class="value-container">
-        <i class="fa-solid fa-chart-line"></i>
-        <p class="value"> 15 </p>
-      </div>
-      <p class="description">pain flow index</p>
-    </div>
-    <div class="stat">
-      <div class="value-container">
-        <i class="fa-solid fa-tower-broadcast"></i>
-        <p class="value"> 200:35 </p>
-      </div>
-      <p class="description">time on-air</p>
-    </div>
-  </div>
-  <div class="footer-bar">
-    <div class="footer-ticker">
-    <p class="trending"> <span> Trending: </span> I was totally sure I would make it back but I didn't <span class="separator"> | </span> I was totally sure I would make it back but I didn't </p>
-    <p class="community"> <span> Community Spotlight: </span> What a shitty project! Not worth a visit... I told you </p> 
-    <p class="news"> <span> Breaking News: </span> What a shitty project! Not worth a visit... I told you </p> 
-  </div>
-</div>
-</div>
 
-<div class="middle-bar">
-  <p class="name">Paul Simons, 37, USA</p>
-  <p class="title">Late night investment went wrong</p>
-   
-</div>
-<audio id="backgroundMusic" loop autoplay>
-        <!-- Replace with your actual audio file -->
-        <source src="../audios/intro.wav" type="audio/mpeg">
-        Your browser does not support the audio element.
-    </audio>
+<body class="off-air">
+  <div class="top-left">TRENT TV</div>
+  <div class="top-left-live">LIVE</div>
+  <div class="top-right">POWERED BY</div>
+  <div class="tv">
+    <div class="display">
+      <div class="box">
+        <div class="spin-container">
+          <div class="shape">
+            <div class="bd"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="next-bar">
+      <p> <span> next up: </span> john malcom &mdash; traded drunk after a drinking night... </p>
+    </div>
+    <div class="stats">
+      <div class="stat">
+        <div class="value-container">
+          <i class="fa-regular fa-clock"></i>
+          <p class="value on-air-countdown"> 0:10 </p>
+        </div>
+        <p class="description"> on-air countdown</p>
+      </div>
+      <div class="stat">
+        <div class="value-container">
+          <i class="fa-regular fa-paper-plane"></i>
+          <p class="value value-name"> 50 </p>
+        </div>
+        <p class="description">total submitted stories</p>
+      </div>
+      <div class="stat">
+        <div class="value-container">
+          <i class="fa-solid fa-list"></i>
+          <p class="value"> 20 </p>
+        </div>
+        <p class="description">queued stories</p>
+      </div>
+      <div class="stat">
+        <div class="value-container">
+          <i class="fa-solid fa-list-check"></i>
+          <p class="value"> 50 </p>
+        </div>
+        <p class="description">voiced stories</p>
+      </div>
+      <div class="stat">
+        <div class="value-container">
+          <i class="fa-solid fa-chart-line"></i>
+          <p class="value"> 15 </p>
+        </div>
+        <p class="description">pain flow index</p>
+      </div>
+      <div class="stat">
+        <div class="value-container">
+          <i class="fa-solid fa-tower-broadcast"></i>
+          <p class="value"> 200:35 </p>
+        </div>
+        <p class="description">time on-air</p>
+      </div>
+    </div>
+    <div class="footer-bar">
+      <div class="footer-ticker">
+        <p class="trending"> <span> Trending: </span> I was totally sure I would make it back but I didn't <span
+            class="separator"> | </span> I was totally sure I would make it back but I didn't </p>
+        <p class="community"> <span> Community Spotlight: </span> What a shitty project! Not worth a visit... I told you
+        </p>
+        <p class="news"> <span> Breaking News: </span> What a shitty project! Not worth a visit... I told you </p>
+      </div>
+    </div>
+  </div>
 
-    <script>
-        const audio = document.getElementById('backgroundMusic');
-        audio.volume = 0.3;
-        
-        // Start music after any user interaction
-        document.body.addEventListener('click', function() {
-            audio.play();
-        }, { once: true }); // Only trigger once
-    </script>
+  <div class="middle-bar">
+    <p class="name">Paul Simons, 37, USA</p>
+    <p class="title">Late night investment went wrong</p>
+
+  </div>
+  <audio id="backgroundMusic" loop autoplay>
+    <!-- Replace with your actual audio file -->
+    <source src="" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <script src="tv.js"></script>
 </body>
+
 </html>
