@@ -115,10 +115,12 @@ body.on-air {
   height: 100vh;
 }
 
+.on-air-bar {
+  display:none;
+}
 
 .next-bar {
   width: 100%;
-
   font-family: 'Poppins', 'Inter', sans-serif;
   font-weight: 800;
   font-size: 0.8rem;
@@ -126,29 +128,12 @@ body.on-air {
   text-transform: uppercase;
   color: rgba(0, 0, 0, 0.2);
   text-shadow: 0.4px 0 0 currentColor, -0.4px 0 0 currentColor;
-
-
   text-align: right;
-
   padding: 7px;
-
-
-
   /*background: rgba(255,156,0, 0.2);*/
   background: rgba(255, 255, 255, 0.8);
 
 }
-
-/*
-.next-bar p::before {
-  content: "\f2ea";         
-  font-family: "Font Awesome 7 Free";
-  font-weight: 900;         
-  margin-left: 8px;
-  padding-right: 2px;
-  color: darkorange;
-}
-*/
 
 .next-bar span {
   color: rgba(0, 0, 0, 1);
@@ -421,20 +406,44 @@ audio {
 /* === Mobile Styles === */
 @media (max-width: 768px) {
   .top-left {
-    font-size: 12px;
+    font-size: 0.6rem;
   }
 
   .top-right {
-    font-size: 12px;
+    font-size: 0.6rem;
   }
 
-  .box {
-    width: 35vmin;
-    height: 35vmin;
+  .top-left-live {
+    top: 30px;
+    width: 60px;
+    font-size: 0.7rem;
+    padding-left: 15px;
+  }
+
+  .on-air-bar {
+    width: 100%;
+    font-family: 'Poppins', 'Inter', sans-serif;
+    font-weight: 800;
+    font-size: 0.6rem;
+    letter-spacing: 0.075em;
+    text-transform: uppercase;
+    color: rgba(0, 0, 0, 0.2);
+    text-shadow: 0.4px 0 0 currentColor, -0.4px 0 0 currentColor;
+    text-align: right;
+    padding: 7px;
+    background: rgba(255, 255, 255, 0.8);
+    display:block;
+
+  }
+
+  .on-air-bar .on-air-text {
+    display: inline-block;
+    
   }
 
   .next-bar {
     font-size: 0.7rem;
+    display: none;
   }
 
   .next-bar span {
@@ -442,7 +451,7 @@ audio {
   }
 
   .stat {
-    font-size: 20px;
+    font-size: 15px;
     padding: 5px 5px 15px 5px;
   }
 
@@ -460,15 +469,19 @@ audio {
   }
 
   .footer-bar {
-    font-size: 0.7rem;
+    font-size: 0.6rem;
   }
 
   .footer-bar span {
-    font-size: 0.72rem;
+    font-size: 0.62rem;
+  }
+
+  .middle-bar {
+    top: 32%;
   }
 
   .middle-bar p {
-    font-size: 11px;
+    color: transparent;
 
   }
 

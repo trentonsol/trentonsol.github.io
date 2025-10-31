@@ -13,16 +13,17 @@
 }
 
 /* Set up default font and background */
-html, body {
+html,
+body {
   height: 100%;
-  
+
   background-color: rgba(0, 0, 0, 0.5);
   color: #222;
-  
-  
-  margin: 0; 
-  
-  
+
+
+  margin: 0;
+
+
 }
 
 /* Remove link decorations */
@@ -34,19 +35,24 @@ a {
 }
 
 /* Remove list bullets and spacing */
-ul, ol {
+ul,
+ol {
   list-style: none;
 }
 
 /* Make images and videos responsive */
-img, video {
+img,
+video {
   max-width: 100%;
   height: auto;
   display: block;
 }
 
 /* Ensure buttons look consistent */
-button, input, textarea, select {
+button,
+input,
+textarea,
+select {
   font: inherit;
   color: inherit;
   background: none;
@@ -55,7 +61,9 @@ button, input, textarea, select {
 }
 
 /* Use border-box for everything */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: inherit;
 }
 
@@ -84,21 +92,41 @@ button, input, textarea, select {
   z-index: 1;
   font-size: 22px;
   background-color: rgba(0, 0, 0, 0.65);
-  padding: 10px;
+  padding: 0px;
   width: 30%;
 }
 
+.hero .overlay:nth-of-type(1) {
+  overflow: auto;
+  scrollbar-width: none;
+  /* Firefox */
+  -ms-overflow-style: none;
+  /* IE/Edge */
+}
 
+.hero .overlay:nth-of-type(1)::-webkit-scrollbar {
+  display: none;
+  /* Chrome, Safari, Opera */
+}
 
 .hero .overlay:nth-of-type(1) i {
-  position: absolute;
-  bottom: 15px;
-  right: 15px;
+
   font-size: 2.2rem;
-  
+
   opacity: 0.8;
   transition: transform 0.3s, opacity 0.3s;
   cursor: pointer;
+}
+
+.no-overflow {
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+}
+
+.overflowing {
+  position: static;
+  padding: 10px;
 }
 
 .hero .overlay:nth-of-type(1) i:hover {
@@ -107,62 +135,64 @@ button, input, textarea, select {
   color: rgba(255, 165, 0, 1);
 }
 
+
 .hero .overlay:nth-of-type(2) {
   background-color: rgba(0, 0, 0, 0);
   /*width: 10%;*/
-   flex-grow: 1;
-   
+  flex-grow: 1;
+
 }
 
 .hero .overlay:nth-of-type(3) {
 
-  width: 5%;
+
   background-color: rgba(255, 165, 0, 1);
   text-align: center;
+  width: 5%;
+  padding: 10px;
 }
 
 .hero .overlay:nth-of-type(3) i:hover {
-  text-shadow: 5px 5px rgba(0,0,0,1);
-}
+  text-shadow: 5px 5px rgba(0, 0, 0, 1);
 
-.hero .overlay:nth-of-type(3) .no-link:hover {
-  text-shadow: 5px 5px rgba(0,0,0,0.3);
 }
 
 
-.hero .overlay h1{
+
+.hero .overlay h1 {
   font-family: 'Press Start 2P', sans-serif;
   background-color: rgba(255, 165, 0, 1);
   /*width: 10%;*/
   padding: 5px;
   color: white;
-  text-shadow: 5px 5px rgba(0,0,0,1);
-  
+  text-shadow: 5px 5px rgba(0, 0, 0, 1);
+
 }
 
-.hero .overlay h3{
+.hero .overlay h3 {
   margin-top: 2%;
   /*background-color: rgba(255, 165, 0, 1);*/
   /*width: 10%;*/
   padding: 5px;
-  color: white; 
-  font: bold 24px/45px Helvetica, Sans-Serif; 
+  color: white;
+  font: bold 24px/45px Helvetica, Sans-Serif;
   line-height: 1.5;
   text-align: left;
-  
+
 }
 
-.hero .overlay p{
+.hero .overlay p {
   margin-top: 1%;
   /*background-color: rgba(255, 165, 0, 1);*/
   /*width: 10%;*/
   padding: 5px;
-  color: white; 
-  font: bold 17px/34px Helvetica, Sans-Serif; 
+  color: white;
+  font: bold 17px/34px Helvetica, Sans-Serif;
   text-align: left;
   line-height: 1.5;
-  white-space: pre-wrap; /* key! */
-  
+  white-space: pre-wrap;
+  /* key! */
+
 }
 
 /* Keyframes for fade-in + slide-up */
@@ -171,6 +201,7 @@ button, input, textarea, select {
     opacity: 0;
     transform: translateY(30px);
   }
+
   100% {
     opacity: 1;
     transform: translateY(0);
@@ -219,71 +250,82 @@ i {
 }
 
 /* === Mobile Styles === */
-    @media (max-width: 768px) {
-      .hero {
-        flex-direction: column;
-        height: 100vh;
-      }
-      
-      
-      .hero .overlay:nth-of-type(1) {
-        width: 100%;
-        height: 95%;
-        padding: 0px;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-      }
-      
-      .hero .overlay:nth-of-type(2) {
-        width: 100%;
-        height: 1%;
-        background-color: rgba(0, 0, 0, 0.65);
-      }
-      
-      .hero .overlay:nth-of-type(3) {
-        width: 100%;
-        height: 5%;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-around;
-        padding: 10px 0;
-      }
-      
-      .hero .overlay h1 {
-        font-size: 1.5rem;
-        text-align: center;
-        margin-bottom: 20px;
-      }
+@media (max-width: 768px) {
+  .hero {
+    flex-direction: column;
+    height: 100vh;
+  }
 
-      .hero .overlay h3 {
-        text-align: center;
-      }
 
-      .hero .overlay p {
-        text-align: center;
-      }
-      
-      .hero .overlay:nth-of-type(1) i {
-        position: static;
-        align-self: center;
-        margin-bottom: 20px;
-      }
-      
-      i {
-        font-size: 28px;
-        margin-bottom: 0;
-      }
-      
-      .dots {
-        position: absolute;
-        bottom: 10%;
-      }
-      
-      .dot {
-        width: 12px;
-        height: 12px;
-      }
-    }
+  .hero .overlay:nth-of-type(1) {
+    width: 100%;
+    height: 84%;
+    padding: 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
 
-   
+  .hero .overlay:nth-of-type(1) .description {
+    font-size: 10px;
+  }
+
+  .hero .overlay:nth-of-type(2) {
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.65);
+    height: 7%;
+  }
+
+  .hero .overlay:nth-of-type(3) {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    padding: 5px;
+    justify-content: space-around;
+
+    height: 7%;
+
+  }
+
+  .hero .overlay:nth-of-type(3) i:hover {
+    text-shadow: 2px 2px rgba(0, 0, 0, 1);
+  }
+
+  .hero .overlay h1 {
+    font-size: 1.5rem;
+    text-align: center;
+    margin-bottom: 5px;
+  }
+
+  .hero .overlay h3 {
+    text-align: center;
+    padding-top: 0;
+    font: bold 15px/28px Helvetica, Sans-Serif;
+  }
+
+  .hero .overlay p {
+    text-align: center;
+    font: bold 12px/20px Helvetica, Sans-Serif;
+  }
+
+  .hero .overlay:nth-of-type(1) i {
+    position: static;
+    align-self: center;
+    margin-bottom: 20px;
+  }
+
+  i {
+    font-size: 1.1rem;
+    margin-bottom: 0;
+  }
+
+  .dots {
+    position: absolute;
+    bottom: 10%;
+  }
+
+  .dot {
+    width: 12px;
+    height: 12px;
+  }
+}

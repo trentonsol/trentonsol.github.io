@@ -5,6 +5,7 @@ const middleBar = document.querySelector('.middle-bar');
 const middleBarName = document.querySelector('.middle-bar .name');
 const middleBarTitle = document.querySelector('.middle-bar .title');
 const nextText = document.querySelector('.next-bar .next-text');
+const onAirText = document.querySelector('.on-air-bar .on-air-text');
 const trending = document.querySelector('.footer-bar .trending-data');
 const spotlight = document.querySelector('.footer-bar .spotlight-data');
 const news = document.querySelector('.footer-bar .news-data');
@@ -13,46 +14,28 @@ const queuedStories = document.querySelector('.stats .queued-stories');
 const voicedStories = document.querySelector('.stats .voiced-stories');
 const pfi = document.querySelector('.stats .pfi');
 const totalOnAir = document.querySelector('.stats .total-on-air');
-
 audio.volume = 0.3;
 let startingSeconds = 5;
 const BACKEND_ADDRESS = "https://cors-beta-pearl.vercel.app";
 
-/*######################## DUMMY DATA #################*/
-const audioData = {
-    "id": 1,
-    "audio": "voice_001.mp3",
-    "name": "Alice Johnson",
-    "age": 28,
-    "country": "United States",
-    "title": "The Silent Algorithm"
-  };
-const nextUp = {
-    name: "Filipe Daniel",
-    title: "How I lost 120k"
-};
-const footerData = {
-    "trending": ["The Clockmaker’s Secret", "Frozen Echoes", "The Lantern Keeper"],
-    "spotlight": ["The River That Remembered", "The Painter of Shadows", "The Sandstorm Prophecy"],
-    "news": [
-      "‘The Clockmaker’s Secret’ Reaches One Million Streams",
-      "‘Frozen Echoes’ Wins Northern Writers Award",
-      "New Exhibit Explores Time and Memory in Storytelling"
-    ]
-  };
-const stats = {
-    "total": "100",
-    "queued": "50",
-    "voiced": "50",
-    "pfi": "28",
-    "totalOnAir": "500:00",
-  };
-/*####################################################*/
+
+function getTimeOnAir(totalSeconds) {
+  const hours = Math.floor(totalSeconds / 3600);
+  const minutes = Math.floor((totalSeconds % 3600) / 60);
+  const seconds = totalSeconds % 60;
+
+  // Pad with zeros so that each part is always two digits
+  const hh = String(hours).padStart(2, "0");
+  const mm = String(minutes).padStart(2, "0");
+  //const ss = String(seconds).padStart(2, "0");
+
+  return `${hh}:${mm}`;
+}
 
 
-async function fetchFiles() {
+async function fetchData(endpoint) {
   try {
-    const res = await fetch(`${BACKEND_ADDRESS}/api/audio`, {
+    const res = await fetch(`${BACKEND_ADDRESS}/api/${endpoint}`, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
     });
@@ -65,12 +48,11 @@ async function fetchFiles() {
     // Try to parse JSON safely
     const data = await res.json();
 
-    if (!data.files || !Array.isArray(data.files)) {
-      throw new Error("Invalid response format — expected { files: [] }");
+    if (Object.hasOwn(data, "error")) {
+      throw new Error("Error fetching data!!!");
     }
 
-    //console.log("Fetched files:", data.files);
-    return data.files;
+    return data;
   } catch (error) {
     console.error("Failed to fetch files:", error.message);
 
@@ -79,7 +61,36 @@ async function fetchFiles() {
   }
 }
 
-function addFooterData (data, htmlElem) {
+async function init() {
+  return await fetchData("init");
+}
+
+async function getData() {
+  return await fetchData("data");
+}
+
+function setStatsData(statsData) {
+  totalStories.textContent = statsData.total;
+  queuedStories.textContent = statsData.queued;
+  voicedStories.textContent = statsData.voiced;
+  pfi.textContent = statsData.pfi;
+  totalOnAir.textContent = getTimeOnAir(parseInt(statsData.totalOnAir));
+}
+
+function setAudioData(audioData) {
+  middleBarName.textContent = `${audioData.name}, ${audioData.country}`;
+  middleBarTitle.textContent = `${audioData.title}`;
+  onAirText.textContent = `${audioData.name}, ${audioData.country} — ${audioData.title}`;
+  audio.src = `${BACKEND_ADDRESS}/${audioData.audio}`;
+  audio.loop = false;
+  audio.play()
+}
+
+function setNextUpData(nextUpData) {
+  nextText.textContent = `${nextUpData.name} — ${nextUpData.title}`;
+}
+
+function setFooterData(data, htmlElem) {
   if (data[0]) htmlElem.textContent = data[0];
   for (let i = 1; i < data.length; i++) {
     htmlElem.insertAdjacentHTML('beforeend', '<span class="separator"> | </span>');
@@ -89,51 +100,49 @@ function addFooterData (data, htmlElem) {
 
 // Function to run the countdown
 function startCountdown(seconds = startingSeconds) {
-    let timeLeft = seconds;
-    let audioAddress = "";
+  let timeLeft = seconds;
 
-    const timer = setInterval(async () => {
-        const paddedTimeLeft = timeLeft.toString().padStart(2, '0');
-        countdown.textContent = `0:${paddedTimeLeft}`;
-        timeLeft--;
+  const timer = setInterval(async () => {
+    const paddedTimeLeft = timeLeft.toString().padStart(2, '0');
+    countdown.textContent = `0:${paddedTimeLeft}`;
+    timeLeft--;
 
-        if (timeLeft < 0) {
-            clearInterval(timer);
-            document.body.classList.remove("off-air");
-            document.body.classList.add("on-air");
-            live.style.display = "block";
-            middleBar.style.display = "flex";
-            const files = await fetchFiles();
-            if (files == []) audioAddress = "";
-            else audioAddress = `${BACKEND_ADDRESS}/${files[0]}`;
-            middleBarName.textContent = `${audioData.name}, ${audioData.age}, ${audioData.country}`;
-            middleBarTitle.textContent = `${audioData.title}`;
-            nextText.textContent = `${nextUp.name} — ${nextUp.title}`;
-            totalStories.textContent = stats.total;           
-            queuedStories.textContent = stats.queued;
-            voicedStories.textContent = stats.voiced;
-            pfi.textContent = stats.pfi;
-            totalOnAir.textContent = stats.totalOnAir;
-            addFooterData(footerData.trending, trending)
-            addFooterData(footerData.spotlight, spotlight)
-            addFooterData(footerData.news, news)
-            audio.src = audioAddress;
-            audio.loop = false;
-            audio.play()
-        }
-    }, 1000);
+    if (timeLeft < 0) {
+      clearInterval(timer);
+      document.body.classList.remove("off-air");
+      document.body.classList.add("on-air");
+      live.style.display = "block";
+      middleBar.style.display = "flex";
+      const data = await getData();
+      if (!Object.hasOwn(data, "error")) {
+        setNextUpData(data.nextUp)
+        setStatsData(data.stats);
+        setFooterData(data.footerData.trending, trending)
+        setFooterData(data.footerData.spotlight, spotlight)
+        setFooterData(data.footerData.news, news)
+        setAudioData(data.audioData)
+
+      }
+    }
+  }, 1000);
 }
 
 
 // Start countdown after any user interaction
-document.body.addEventListener('click', function () {
+document.body.addEventListener('click', async function () {
+  const initData = await init();
+  if (!Object.hasOwn(initData, "error")) {
+    setStatsData(initData.stats);
+    setNextUpData(initData.nextUp)
     startCountdown();
+  }
 }, { once: true }); // Only trigger once
 
 audio.addEventListener('ended', () => {
-    document.body.classList.remove("on-air");
-    document.body.classList.add("off-air");
-    live.style.display = "none";
-    middleBar.style.display = "none";
-    startCountdown();
+  document.body.classList.remove("on-air");
+  document.body.classList.add("off-air");
+  live.style.display = "none";
+  middleBar.style.display = "none";
+  onAirText.textContent = ""
+  startCountdown();
 });
