@@ -15,10 +15,33 @@ const voicedStories = document.querySelector('.stats .voiced-stories');
 const pfi = document.querySelector('.stats .pfi');
 const totalOnAir = document.querySelector('.stats .total-on-air');
 audio.volume = 0.3;
-const startingSeconds = 60*1;
+const startingSeconds = 60 * 10;
 const updateInterval = 60000 // 1 minute
 const BACKEND_ADDRESS = "https://cors-beta-pearl.vercel.app";
 const AUDIOS_ADDRESS = "https://pub-69f145390fd84c658e8a0fad0e65e3b5.r2.dev"
+// Your playlist — an array of file URLs
+const playlist = [
+  "audios/background_audio_001.mp3",
+  "audios/background_audio_002.mp3",
+  "audios/background_audio_003.mp3",
+  "audios/background_audio_004.mp3",
+  "audios/background_audio_005.mp3",
+  "audios/background_audio_006.mp3",
+  "audios/background_audio_007.mp3",
+  "audios/background_audio_008.mp3",
+  "audios/background_audio_009.mp3",
+  "audios/background_audio_010.mp3",
+  "audios/background_audio_011.mp3",
+  "audios/background_audio_012.mp3",
+  "audios/background_audio_013.mp3",
+  "audios/background_audio_014.mp3",
+  "audios/background_audio_015.mp3",
+  "audios/background_audio_016.mp3",
+  "audios/background_audio_017.mp3",
+  "audios/background_audio_018.mp3",
+  "audios/background_audio_019.mp3",
+];
+let currentIndex = 2;
 
 
 function getTime(totalSeconds) {
@@ -80,7 +103,7 @@ function setStatsData(statsData) {
 }
 
 function setAudioData(audioData) {
-  middleBarName.textContent = audioData.country ? `${audioData.name}, ${audioData.country}`:`${audioData.name}`;
+  middleBarName.textContent = audioData.country ? `${audioData.name}, ${audioData.country}` : `${audioData.name}`;
   middleBarTitle.textContent = `${audioData.title}`;
   onAirText.textContent = `${audioData.name}, ${audioData.country} — ${audioData.title}`;
   audio.src = `${AUDIOS_ADDRESS}/${audioData.audio}`;
@@ -105,7 +128,7 @@ function startCountdown(seconds = startingSeconds) {
   let timeLeft = seconds;
 
   const timer = setInterval(async () => {
-    timeLeft -= Math.floor(updateInterval/1000);
+    timeLeft -= Math.floor(updateInterval / 1000);
     countdown.textContent = getTime(timeLeft);
 
     if (timeLeft <= 0) {
@@ -131,6 +154,9 @@ function startCountdown(seconds = startingSeconds) {
 
 // Start countdown after any user interaction
 document.body.addEventListener('click', async function () {
+  audio.src = playlist[currentIndex];
+  audio.loop = false;
+  audio.play()
   const initData = await init();
   if (!Object.hasOwn(initData, "error")) {
     countdown.textContent = getTime(startingSeconds);
@@ -141,11 +167,21 @@ document.body.addEventListener('click', async function () {
 }, { once: true }); // Only trigger once
 
 audio.addEventListener('ended', () => {
-  document.body.classList.remove("on-air");
-  document.body.classList.add("off-air");
-  live.style.display = "none";
-  middleBar.style.display = "none";
-  onAirText.textContent = ""
-  countdown.textContent = getTime(startingSeconds);
-  startCountdown();
+  // If the ended event was triggered by the end of the person speaking
+  // then update the styles and the restart the countdown
+  if (!audio.src.includes(playlist[currentIndex])) {
+    document.body.classList.remove("on-air");
+    document.body.classList.add("off-air");
+    live.style.display = "none";
+    middleBar.style.display = "none";
+    onAirText.textContent = ""
+    countdown.textContent = getTime(startingSeconds);
+    startCountdown();
+  }
+  // Play the next background music
+  currentIndex = (currentIndex + 1) % playlist.length;  // wrap around
+  console.log(`current index: ${currentIndex}`);
+  console.log(`audio.src: ${audio.src}`);
+  audio.src = playlist[currentIndex];
+  audio.play();
 });
