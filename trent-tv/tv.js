@@ -15,11 +15,13 @@ const voicedStories = document.querySelector('.stats .voiced-stories');
 const pfi = document.querySelector('.stats .pfi');
 const totalOnAir = document.querySelector('.stats .total-on-air');
 audio.volume = 0.3;
-let startingSeconds = 5;
+const startingSeconds = 60*1;
+const updateInterval = 60000 // 1 minute
 const BACKEND_ADDRESS = "https://cors-beta-pearl.vercel.app";
+const AUDIOS_ADDRESS = "https://pub-69f145390fd84c658e8a0fad0e65e3b5.r2.dev"
 
 
-function getTimeOnAir(totalSeconds) {
+function getTime(totalSeconds) {
   const hours = Math.floor(totalSeconds / 3600);
   const minutes = Math.floor((totalSeconds % 3600) / 60);
   const seconds = totalSeconds % 60;
@@ -74,14 +76,14 @@ function setStatsData(statsData) {
   queuedStories.textContent = statsData.queued;
   voicedStories.textContent = statsData.voiced;
   pfi.textContent = statsData.pfi;
-  totalOnAir.textContent = getTimeOnAir(parseInt(statsData.totalOnAir));
+  totalOnAir.textContent = getTime(parseInt(statsData.totalOnAir));
 }
 
 function setAudioData(audioData) {
-  middleBarName.textContent = `${audioData.name}, ${audioData.country}`;
+  middleBarName.textContent = audioData.country ? `${audioData.name}, ${audioData.country}`:`${audioData.name}`;
   middleBarTitle.textContent = `${audioData.title}`;
   onAirText.textContent = `${audioData.name}, ${audioData.country} — ${audioData.title}`;
-  audio.src = `${BACKEND_ADDRESS}/${audioData.audio}`;
+  audio.src = `${AUDIOS_ADDRESS}/${audioData.audio}`;
   audio.loop = false;
   audio.play()
 }
@@ -103,11 +105,10 @@ function startCountdown(seconds = startingSeconds) {
   let timeLeft = seconds;
 
   const timer = setInterval(async () => {
-    const paddedTimeLeft = timeLeft.toString().padStart(2, '0');
-    countdown.textContent = `0:${paddedTimeLeft}`;
-    timeLeft--;
+    timeLeft -= Math.floor(updateInterval/1000);
+    countdown.textContent = getTime(timeLeft);
 
-    if (timeLeft < 0) {
+    if (timeLeft <= 0) {
       clearInterval(timer);
       document.body.classList.remove("off-air");
       document.body.classList.add("on-air");
@@ -124,7 +125,7 @@ function startCountdown(seconds = startingSeconds) {
 
       }
     }
-  }, 1000);
+  }, updateInterval);
 }
 
 
@@ -132,6 +133,7 @@ function startCountdown(seconds = startingSeconds) {
 document.body.addEventListener('click', async function () {
   const initData = await init();
   if (!Object.hasOwn(initData, "error")) {
+    countdown.textContent = getTime(startingSeconds);
     setStatsData(initData.stats);
     setNextUpData(initData.nextUp)
     startCountdown();
@@ -144,5 +146,6 @@ audio.addEventListener('ended', () => {
   live.style.display = "none";
   middleBar.style.display = "none";
   onAirText.textContent = ""
+  countdown.textContent = getTime(startingSeconds);
   startCountdown();
 });
