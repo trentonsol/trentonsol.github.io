@@ -180,8 +180,6 @@ audio.addEventListener('ended', () => {
   }
   // Play the next background music
   currentIndex = (currentIndex + 1) % playlist.length;  // wrap around
-  console.log(`current index: ${currentIndex}`);
-  console.log(`audio.src: ${audio.src}`);
   audio.src = playlist[currentIndex];
   audio.play();
 });
